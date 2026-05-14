@@ -25,7 +25,9 @@ begin
 	if(!rst)
 	begin
 		xmit_done_H <= 1'b1;
-		xmit_active <= 1'b0;
+rec_readyH <=next_rec_readyH;
+                rec_busy <=next_rec_busy;
+                rec_data_H <= next_rec_dataH;		xmit_active <= 1'b0;
 		uart_XMIT_data_H <= 1'b1;
 		ps <= 1'b0;
 	end
