@@ -4,7 +4,7 @@ input wire clk,rst;
 
 output reg baud_clk;
 
-localparam MAX_COUNT = ( (freq)/(baud_rate * 16) );
+localparam MAX_COUNT = (  ((freq)/(baud_rate) )/16 );
 reg [$clog2(MAX_COUNT) -1:0] counter;
 
 

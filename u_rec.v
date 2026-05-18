@@ -27,7 +27,7 @@ always@(posedge clk or negedge rst)
 begin
 	if(!rst)
 	begin
-		rec_readyH <= 1'b0;
+		rec_readyH <= 1'b1;
 		rec_busy <= 1'b0;
 		rec_dataH <= 1'b1;
 		ps <= 1'b0;
@@ -61,7 +61,7 @@ begin
 	end
 	else
 	begin
-		if( (ps == recieve && counter == 7))
+		if( (ps == recieve && counter == 7-2))
 		begin
 			data[bit] <= sync1;
 		end
@@ -85,14 +85,14 @@ begin
 		begin
 			if(bit == width -1)
 			begin
-				if(counter == 7)
+				if(counter == 7 - 2)
 					bit <= 1'b0;
 				else
 					bit <= bit;
 			end
 			else
 			begin
-				if(counter == 7)
+				if(counter == 7-2)
 					bit <= bit + 1;
 			end
 		end
@@ -119,7 +119,7 @@ begin
 	case(ps)
 		idle:
 		begin
-			next_rec_readyH = 1'b0;
+			next_rec_readyH = 1'b1;
                 	next_rec_busy = 1'b0;
 
 			count_EN = 0;
@@ -141,7 +141,7 @@ begin
 			next_rec_readyH = 1'b0;
                		next_rec_busy = 1'b1;
 			count_EN =1;
-			if(counter == 7)
+			if(counter == 7-2)
 			begin
 				if(sync1 == 0)
 				begin
@@ -162,7 +162,7 @@ begin
 			next_rec_readyH = 1'b0;
                 	next_rec_busy = 1'b1;
 			count_EN = 1;
-			if (bit == (width - 1) && counter == 7)
+			if (bit == (width - 1) && counter == 7-2)
 			begin
 				ns = stop;
 			end
@@ -174,7 +174,7 @@ begin
 		stop:
 		begin
 			count_EN = 1;
-			if(counter == 7)
+			if(counter == 7-2)
 			begin
 				if(sync1 == 1)
 				begin
@@ -185,7 +185,7 @@ begin
 				end
 				else
 				begin
-                			next_rec_readyH = 1'b0;
+                			next_rec_readyH = 1'b1;
                 			next_rec_busy = 1'b0;
 					next_rec_dataH = 0;
 					ns = idle;
