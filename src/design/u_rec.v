@@ -29,7 +29,7 @@ begin
 	begin
 		rec_readyH <= 1'b1;
 		rec_busy <= 1'b0;
-		rec_dataH <= 1'b1;
+		rec_dataH <= 0;
 		ps <= 1'b0;
 	end
 	else
@@ -121,7 +121,6 @@ begin
 		begin
 			next_rec_readyH = 1'b1;
                 	next_rec_busy = 1'b0;
-
 			count_EN = 0;
 			if(sync1 == 0)
 			begin
