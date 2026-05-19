@@ -698,6 +698,13 @@ initial begin
 	test_receiver_no_stop(8'hA5);                  // F-19
 
 
+	//Toggles
+	test_transmitter(8'h00);       
+        repeat(32) @(posedge baud_clk_tb);
+	xmitH = 1;
+	repeat(8) @(posedge baud_clk_tb);
+	sys_rst_l = 0;
+		
 	$display("\n=============================");
 	$display("TX PASS: %0d | TX FAIL: %0d", tx_pass, tx_errors);
 	$display("RX PASS: %0d | RX FAIL: %0d", rx_pass, rx_errors);
