@@ -22,6 +22,7 @@ integer i;
 integer tx_pass, tx_errors;
 integer rx_pass, rx_errors;
 
+/* joshua dut
 uart #(
 	.freq (FREQ),
 	.baud_rate (BAUD_RATE),
@@ -39,6 +40,28 @@ uart #(
 	.rec_busy (rec_busy),
 	.xmit_active (xmit_active)
 );
+
+*/
+
+
+uart_top #(
+        .XTAL_CLK (FREQ),
+        .baud_rate (BAUD_RATE),
+        .N (WIDTH)
+) dut (
+        .sys_clk(sys_clk),
+        .sys_rst_l (sys_rst_l),
+        .xmitH (xmitH),
+        .xmit_dataH (xmit_dataH),
+        .uart_REC_dataH(uart_REC_dataH),
+        .uart_XMIT_dataH (uart_XMIT_dataH),
+        .xmit_doneH(xmit_doneH),
+        .rec_readyH(rec_readyH),
+        .rec_dataH (rec_dataH),
+        .rec_busy (rec_busy),
+        .xmit_active (xmit_active)
+);
+
 
 initial sys_clk = 0;
 always #10 sys_clk = ~sys_clk;
